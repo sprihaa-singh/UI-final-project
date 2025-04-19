@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap');
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.custom-navbar {
+    background-color: #a3d2ff !important;
+    padding: 15px 0;
+    text-align: center;
+}
+
+.nav-links {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    justify-content: center !important;
+    gap: 30px !important;
+}
+
+.nav-item {
+    display: inline !important;
+}
+
+.nav-link {
+    font-family: 'Caveat', cursive !important;
+    font-size: 24px !important;
+    color: #000 !important;
+    text-decoration: none !important;
+    padding: 5px 10px !important;
+}
+
+.nav-link:hover {
+    color: #555 !important;
+}
+
+.nav-link.active {
+    border: 2px solid #B3D4FC !important;
+    border-radius: 50% !important;
+    padding: 5px 15px !important;
+}
+
+.quiz-content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: fit-content;
+}
+
+.character-pinyin-container {
+    text-align: center;
+    margin: 20px 0;
+    width: 100%;
+}
+
+.character-display {
+    font-size: 48px;
+    margin: 0;
+}
+
+.pinyin-display {
+    font-size: 20px;
+    margin: 5px 0 0 0;
+    color: #555;
+}
+
+.answer-choices-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+    margin: 10px 0;
+    flex-wrap: wrap;
+}
+
+.form-check {
+    margin: 0;
+}
+
+.btn-primary {
+    background-color: #a3d2ff;
+    border-color: #a3d2ff;
+    color: #000;
+}
+
+.btn-primary:hover {
+    background-color: #8bbdff;
+    border-color: #8bbdff;
+}
+
+.character-container {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.red-circle {
+    width: 50px;
+    height: 50px;
+    background-color: transparent;
+    border: 2px solid red;
+    border-radius: 50%;
+    position: absolute;
+    cursor: move;
+}

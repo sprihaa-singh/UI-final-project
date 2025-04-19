@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Quiz Question {{ question_id }} of 5</h1>
+    <p>{{ question.question }}</p>
+    <form id="quiz-form" action="#">
+        {% if question.type == "multiple_choice" %}
+            <div class="quiz-content-container">
+                {% if question.question.startswith("Using the radical to help you guess") or question.question.startswith("What is the corresponding radical") or question.question.startswith("Identify the radical") %}
+                    <div class="character-pinyin-container">
+                        <div class="character-display">{{ question.character }}</div>
+                        <p class="pinyin-display">{{ question.pinyin }}</p>
+                    </div>
+                {% elif question.question.startswith("This word means River") %}
+                    <div class="character-pinyin-container">
+                        <div class="character-display">
+                            <span class="radical-placeholder">?</span>
+                            <span>{{ question.display_radical }}</span>
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="answer-choices-container">
+                    {% for option in question.options %}
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="answer" value="{{ option }}" id="option-{{ loop.index }}">
+                            <label class="form-check-label" for="option-{{ loop.index }}">{{ option }}</label>
+                        </div>
+                    {% endfor %}
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        {% endif %}
+    </form>
+    <input type="hidden" id="question-id" value="{{ question_id }}">
+    <input type="hidden" id="question-type" value="{{ question.type }}">
+{% endblock %}

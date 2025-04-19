@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Lesson {{ lesson_id }}: {{ lesson.meaning | capitalize }}</h1>
+    <h2>Radical: {{ lesson.radical }}</h2>
+    <p>{{ lesson.description }}</p>
+    <h3>Examples:</h3>
+    <ul>
+        {% for example in lesson.examples %}
+            <li>{{ example }}</li>
+        {% endfor %}
+    </ul>
+    <h3>Practice Tracing</h3>
+    <p>(Tracing activity placeholder - draw the radical {{ lesson.radical }})</p>
+    <button id="next-button" class="btn btn-primary" data-lesson-id="{{ lesson_id }}">Next</button>
+{% endblock %}

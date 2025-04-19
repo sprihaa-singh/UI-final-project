@@ -1,0 +1,121 @@
+{
+  "radicals": [
+    {
+      "id": 1,
+      "radical": "氵",
+      "meaning": "Water",
+      "description": "This radical mimics the shape of flowing water. The water radical can be found in characters with meanings related to water or liquid.",
+      "examples": [
+        "汗: sweat",
+        "江: river",
+        "洗: wash",
+        "海: sea"
+      ],
+      "practice": "(Tracing activity placeholder - draw the radical 氵)"
+    },
+    {
+      "id": 2,
+      "radical": "宀",
+      "meaning": "Roof",
+      "description": "This radical mimics the shape of a roof over a house. The roof radical can be found in characters with meanings related to houses or buildings.",
+      "examples": [
+        "家: house",
+        "室: room",
+        "安: peace",
+        "宝: treasure"
+      ],
+      "practice": "(Tracing activity placeholder - draw the radical 宀)"
+    },
+    {
+      "id": 3,
+      "radical": "扌",
+      "meaning": "Hand",
+      "description": "This radical mimics the shape of a hand. The hand radical can be found in characters with meanings related to actions done with hands.",
+      "examples": [
+        "拍: to pat",
+        "打: to hit",
+        "抱: to hug",
+        "拉: to pull"
+      ],
+      "practice": "(Tracing activity placeholder - draw the radical 扌)"
+    },
+    {
+      "id": 4,
+      "radical": "火",
+      "meaning": "Fire",
+      "description": "This radical mimics the shape of flames. The fire radical can be found in characters with meanings related to fire or heat.",
+      "examples": [
+        "灯: lamp",
+        "烟: smoke",
+        "烤: to roast",
+        "烦: annoyed"
+      ],
+      "practice": "(Tracing activity placeholder - draw the radical 火)"
+    },
+    {
+      "id": 5,
+      "radical": "木",
+      "meaning": "Tree",
+      "description": "This radical mimics the shape of a tree with branches. The tree radical can be found in characters with meanings related to wood or trees.",
+      "examples": [
+        "树: tree",
+        "林: forest",
+        "板: board",
+        "根: root"
+      ],
+      "practice": "(Tracing activity placeholder - draw the radical 木)"
+    }
+  ],
+  "quiz": [
+    {
+      "id": 1,
+      "type": "multiple_choice",
+      "question": "Identify the radical this character uses: 海 (hǎi)",
+      "character": "海",
+      "pinyin": "hǎi",
+      "options": ["Hand", "Ocean", "Flame", "Wood"],
+      "correct_answer": "Ocean"
+    },
+    {
+      "id": 2,
+      "type": "multiple_choice",
+      "question": "Using the radical to help you guess, what is the meaning of this character? 推 (tuī)",
+      "character": "推",
+      "pinyin": "tuī",
+      "options": ["Boat", "Push", "Fruit", "Burn"],
+      "correct_answer": "Push"
+    },
+    {
+      "id": 3,
+      "type": "multiple_choice",
+      "question": "What is the corresponding radical for this character, and what is the meaning? 桐 (tóng)",
+      "character": "桐",
+      "pinyin": "tóng",
+      "options": [
+        "木 (Tree)",
+        "氵 (Water)",
+        "火 (Fire)",
+        "宀 (Roof)"
+      ],
+      "correct_answer": "木 (Tree)"
+    },
+    {
+      "id": 4,
+      "type": "multiple_choice",
+      "question": "This word means River. Select the correct radical to complete the character",
+      "character": "可",
+      "display_radical": "可",
+      "options": ["氵", "木", "火", "宀"],
+      "correct_answer": "氵"
+    },
+    {
+      "id": 5,
+      "type": "multiple_choice",
+      "question": "Using the radical to help you guess, what is the meaning of this character? 說 (shuō)",
+      "character": "說",
+      "pinyin": "shuō",
+      "options": ["Carve", "Dormitory", "Speech", "Boil"],
+      "correct_answer": "Speech"
+    }
+  ]
+}
