@@ -1,6 +1,6 @@
 {
   "session_id": "331e5463-f3bb-49ac-bd08-c78f036953c4",
-  "start_time": "2025-04-20T15:12:12.238549",
+  "start_time": "2025-04-20T15:21:14.236263",
   "learning": [
     {
       "lesson_id": 1,
@@ -93,51 +93,56 @@
       "lesson_id": 1,
       "event_type": "entry",
       "timestamp": "2025-04-20T15:12:12.253964"
+    },
+    {
+      "lesson_id": 1,
+      "event_type": "entry",
+      "timestamp": "2025-04-20T15:21:14.263738"
+    },
+    {
+      "lesson_id": 1,
+      "event_type": "next_click",
+      "timestamp": "2025-04-20T15:21:20.457286",
+      "selections": {}
+    },
+    {
+      "lesson_id": 2,
+      "event_type": "entry",
+      "timestamp": "2025-04-20T15:21:20.474051"
+    },
+    {
+      "lesson_id": 1,
+      "event_type": "entry",
+      "timestamp": "2025-04-20T15:21:44.673181"
+    },
+    {
+      "lesson_id": 1,
+      "event_type": "entry",
+      "timestamp": "2025-04-20T15:23:02.228874"
+    },
+    {
+      "lesson_id": 1,
+      "event_type": "next_click",
+      "timestamp": "2025-04-20T15:23:14.177728",
+      "selections": {}
+    },
+    {
+      "lesson_id": 2,
+      "event_type": "entry",
+      "timestamp": "2025-04-20T15:23:14.193835"
+    },
+    {
+      "lesson_id": 2,
+      "event_type": "next_click",
+      "timestamp": "2025-04-20T15:23:19.123494",
+      "selections": {}
+    },
+    {
+      "lesson_id": 3,
+      "event_type": "entry",
+      "timestamp": "2025-04-20T15:23:19.137916"
     }
   ],
-  "quiz_answers": [
-    {
-      "question_id": 1,
-      "user_answer": "Wood",
-      "correct_answer": "Ocean",
-      "is_correct": false,
-      "timestamp": "2025-04-20T15:12:15.313492"
-    },
-    {
-      "question_id": 2,
-      "user_answer": "Burn",
-      "correct_answer": "Push",
-      "is_correct": false,
-      "timestamp": "2025-04-20T15:12:16.200077"
-    },
-    {
-      "question_id": 3,
-      "user_answer": "宀 (Roof)",
-      "correct_answer": "木 (Tree)",
-      "is_correct": false,
-      "timestamp": "2025-04-20T15:12:18.805407"
-    },
-    {
-      "question_id": 4,
-      "user_answer": "宀",
-      "correct_answer": "氵",
-      "is_correct": false,
-      "timestamp": "2025-04-20T15:12:19.921312"
-    },
-    {
-      "question_id": 5,
-      "user_answer": "Lamp",
-      "correct_answer": "Speech",
-      "is_correct": false,
-      "timestamp": "2025-04-20T15:12:22.957249"
-    },
-    {
-      "question_id": 5,
-      "user_answer": "Lamp",
-      "correct_answer": "Lamp",
-      "is_correct": true,
-      "timestamp": "2025-04-20T15:12:31.921338"
-    }
-  ],
+  "quiz_answers": [],
   "practice_answers": []
 }

@@ -6,10 +6,16 @@
 
   <div class="mb-3">
     <strong>Meaning:</strong> {{ lesson.meaning }}<br>
-    <strong>Example Character:</strong> {{ lesson.examples[0] }} ({{ lesson.pinyin }})<br>
-    <strong>Definition:</strong> {{ lesson.description }}
+    <strong>Pinyin:</strong> {{ lesson.pinyin }}<br>
+    <strong>Example Characters:</strong><br>
+    <ul>
+      {% for example in lesson.examples %}
+        {% set character, meaning = example.split(': ') %}
+        <li>{{ character }} ({{ meaning }})</li>
+      {% endfor %}
+    </ul>
+    <strong>Description:</strong> {{ lesson.description }}
   </div>
-
   <!-- Stroke Order Section: Always visible -->
   <div class="mt-5">
     <h4>Stroke Order:</h4>
