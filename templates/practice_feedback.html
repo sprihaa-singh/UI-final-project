@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Practice Question {{ practice_id }} of {{ total_items }} - Feedback</h1>
+
+    {# Show Correct/Incorrect Alert #}
+    {% if user_answer_data.is_correct %}
+        <div class="alert alert-success mt-4" role="alert">
+           <h4 class="alert-heading">✔️ CORRECT!</h4>
+        </div>
+    {% else %}
+        <div class="alert alert-danger mt-4" role="alert">
+            <h4 class="alert-heading">❌ INCORRECT</h4>
+        </div>
+    {% endif %}
+
+    {# Display Details based on Question Type #}
+    {% if item.type == 'recall' %}
+        {# --- Recall Feedback Section (No changes needed here) --- #}
+        <div class="card mt-3">
+            <div class="card-body">
+                <h5 class="card-title">Radical: <span style="font-size: 1.5em; color: #dc3545;">{{ item.radical }}</span></h5>
+                <p class="card-text fs-5"><strong>You said:</strong> "{{ user_answer_data.user_answer }}"</p>
+                {% if not user_answer_data.is_correct %}
+                    <p class="card-text fs-5"><strong>Correct Meaning:</strong> {{ correct_answer_details }}</p>
+                {% endif %}
+            </div>
+        </div>
+        {% if user_answer_data.is_correct and item.examples %}
+            <div class="card mt-3">
+                 <div class="card-body">
+                    <h5 class="card-title">Common Characters with {{ item.radical }}:</h5>
+                    <ul class="list-group list-group-flush">
+                        {% for example in item.examples %}
+                            <li class="list-group-item">{{ example }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endif %}
+        {# --- End Recall Feedback Section --- #}
+
+    {% elif item.type == 'matching' %}
+         {# --- CORRECTED Matching Feedback Display --- #}
+         {# This block completely replaces the previous version with <pre> tags #}
+         <div class="row mt-3">
+             <div class="col">
+                 <h5>Your Matches:</h5>
+                 <ul class="list-group">
+                     {# Loop through submitted pairs #}
+                     {% for radical, character in user_answer_data.user_answer.items() %}
+                         <li class="list-group-item">
+                             <span style="font-size: 1.5em;">{{ radical }}</span> → <span style="font-size: 1.5em;">{{ character }}</span>
+                         </li>
+                     {% else %}
+                         <li class="list-group-item">You didn't submit any matches.</li>
+                     {% endfor %}
+                 </ul>
+             </div>
+             <div class="col">
+                 <h5>Correct Matches:</h5>
+                 <ul class="list-group">
+                     {# Loop through correct pairs #}
+                     {% for radical, character in correct_answer_details.items() %}
+                          <li class="list-group-item">
+                             <span style="font-size: 1.5em;">{{ radical }}</span> → <span style="font-size: 1.5em;">{{ character }}</span>
+                         </li>
+                     {% endfor %}
+                 </ul>
+             </div>
+         </div>
+         {# --- End CORRECTED Matching Feedback Display --- #}
+
+    {% endif %} {# This is the correct endif for the main if/elif block #}
+
+    {# Next Button #}
+    <a href="{{ next_url }}" class="btn btn-primary btn-lg mt-4">Next</a>
+{% endblock %}

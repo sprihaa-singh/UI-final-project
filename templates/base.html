@@ -9,27 +9,34 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light"> <div class="container-fluid">
-            <a class="navbar-brand" href="/">Chinese Radicals</a>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ url_for('home') }}">Chinese Radicals</a> {# Use url_for #}
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">HOME</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/learn/1">LEARN</a>
-                    </li>
-                    <li class="nav-item">
-                         <a class="nav-link" href="/learn/1">PRACTICE</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/quiz/1">QUIZ</a>
-                    </li>
+                 {# Combined Nav Items for clarity #}
+                <ul class="navbar-nav w-100 d-flex justify-content-between"> {# Use Bootstrap flex utilities #}
+                    {# Left-aligned group #}
+                    <div class="d-flex">
+                         <li class="nav-item">
+                            <a class="nav-link {% if request.endpoint == 'home' %}active{% endif %}" href="{{ url_for('home') }}">HOME</a>
+                         </li>
+                    </div>
+                    {# Right-aligned group #}
+                     <div class="d-flex">
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.endpoint == 'learn' %}active{% endif %}" href="{{ url_for('learn', lesson_id=1) }}">LEARN</a>
+                        </li>
+                        {# ADDED PRACTICE LINK #}
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.endpoint == 'practice' or request.endpoint == 'practice_feedback' %}active{% endif %}" href="{{ url_for('practice', practice_id=1) }}">PRACTICE</a>
+                        </li>
+                        <li class="nav-item">
+                             <a class="nav-link {% if request.endpoint == 'quiz' or request.endpoint == 'results' %}active{% endif %}" href="{{ url_for('quiz', question_id=1) }}">QUIZ</a>
+                        </li>
+                    </div>
                 </ul>
             </div>
         </div>
@@ -39,6 +46,7 @@
         {% endblock %}
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    {# Ensure main.js is loaded AFTER jQuery #}
     <script src="{{ url_for('static', filename='main.js') }}"></script>
 </body>
 </html>

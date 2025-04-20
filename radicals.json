@@ -73,8 +73,8 @@
       "question": "Identify the radical this character uses: 海 (hǎi)",
       "character": "海",
       "pinyin": "hǎi",
-      "options": ["Hand", "Ocean", "Flame", "Wood"],
-      "correct_answer": "Ocean"
+      "options": ["Hand", "Water", "Flame", "Wood"],
+      "correct_answer": "Water"
     },
     {
       "id": 2,
@@ -116,6 +116,56 @@
       "pinyin": "shuō",
       "options": ["Carve", "Dormitory", "Speech", "Boil"],
       "correct_answer": "Speech"
+    }
+  ],
+  "practice": [
+    {
+      "id": 1,
+      "type": "recall",
+      "radical": "火",
+      "correct_answer": "Fire",
+      "examples": ["灯 (lamp)", "炒 (to fry)", "烟 (smoke)", "炉 (stove)"]
+    },
+    {
+      "id": 2,
+      "type": "recall",
+      "radical": "木",
+      "correct_answer": "Tree",
+       "examples": ["林 (forest)", "桥 (bridge)", "椅 (chair)", "根 (root)"]
+    },
+    {
+      "id": 3,
+      "type": "recall",
+      "radical": "氵",
+      "correct_answer": "Water",
+      "examples": ["汁 (juice)", "汗 (sweat)", "池 (pond)", "汤 (soup)"]
+    },
+    {
+      "id": 4,
+      "type": "recall",
+      "radical": "扌",
+      "correct_answer": "Hand",
+      "examples": ["握 (to hold/grasp)", "接 (to receive)", "提 (to carry)", "拉 (to pull)"]
+    },
+    {
+      "id": 5,
+      "type": "recall",
+      "radical": "宀",
+      "correct_answer": "Home",
+      "examples": ["家 (house/family)", "室 (room)", "宅 (to reside)", "宫 (palace)"]
+    },
+    {
+      "id": 6,
+      "type": "matching",
+      "radicals": ["宀", "扌", "氵", "火", "木"],
+      "characters": ["油", "森", "家", "接", "灯"],
+      "correct_pairs": {
+        "宀": "家",
+        "扌": "接",
+        "氵": "油",
+        "火": "灯",
+        "木": "森"
+      }
     }
   ]
 }

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Practice Question {{ practice_id }} of {{ total_items }}</h1>
+    {# Display the radical prominently #}
+    <h2>Radical: <span style="font-size: 2.5em; color: #dc3545;">{{ item.radical }}</span></h2>
+
+    {# The form will be handled by JavaScript for AJAX submission #}
+    <form id="practice-form" action="{{ url_for('practice', practice_id=practice_id) }}" method="POST" class="mt-4">
+        <div class="mb-3">
+            <label for="answerInput" class="form-label fs-5">Type the meaning of the above radical:</label>
+            <input type="text" class="form-control form-control-lg" id="answerInput" name="answer" required autofocus> {# Added autofocus #}
+        </div>
+
+        {# === MOVED HIDDEN INPUTS INSIDE THE FORM === #}
+        <input type="hidden" id="practice-id" value="{{ practice_id }}">
+        <input type="hidden" id="practice-type" value="{{ item.type }}">
+        {# === END MOVED HIDDEN INPUTS === #}
+
+        <button type="submit" class="btn btn-primary btn-lg">Submit</button> {# Larger button #}
+    </form>
+{% endblock %}

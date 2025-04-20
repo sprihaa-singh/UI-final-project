@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Practice Question {{ practice_id }} of {{ total_items }}</h1>
+    <h2>Match the Radicals to the Characters</h2>
+    <p>Click one radical, then click the character it matches. Repeat for all pairs.</p>
+
+    {# Alert for user feedback during matching #}
+    <div id="matching-feedback" class="alert alert-info" role="alert" style="display: none;">
+        Selected: <span id="selected-radical"></span> - Click matching character.
+    </div>
+     <div id="matching-complete" class="alert alert-warning" role="alert" style="display: none;">
+        All pairs selected. Click Submit Matches.
+    </div>
+
+
+    <form id="practice-form" action="{{ url_for('practice', practice_id=practice_id) }}" method="POST" class="mt-4">
+        <div class="row">
+            <div class="col">
+                <h3>Radicals</h3>
+                <ul class="list-group" id="radicals-list">
+                    {# Add data-value for JS identification #}
+                    {% for radical in item.radicals %}
+                        <li class="list-group-item list-group-item-action radical-item"
+                            style="font-size: 1.5em; cursor: pointer;"
+                            data-value="{{ radical }}">
+                            {{ radical }}
+                            <span class="match-indicator float-end" style="font-size: 0.8em; color: green; display: none;">✔️ Matched</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col">
+                <h3>Characters</h3>
+                 <ul class="list-group" id="characters-list">
+                     {# Shuffle characters? For simplicity, using order from JSON #}
+                     {# Add data-value for JS identification #}
+                    {% for character in item.characters %}
+                        <li class="list-group-item list-group-item-action character-item"
+                            style="font-size: 1.5em; cursor: pointer;"
+                            data-value="{{ character }}">
+                            {{ character }}
+                             <span class="match-indicator float-end" style="font-size: 0.8em; color: green; display: none;">✔️ Matched</span>
+                        </li>
+                     {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        {# Hidden inputs needed by the JS handler #}
+        <input type="hidden" id="practice-id" value="{{ practice_id }}">
+        <input type="hidden" id="practice-type" value="{{ item.type }}">
+        {# Hidden input to store final pairs (populated by JS on submit) #}
+        <input type="hidden" id="matched-pairs" name="pairs">
+
+        <button id="submit-matches-btn" type="submit" class="btn btn-primary btn-lg mt-3" disabled>Submit Matches</button>
+        <button id="reset-matches-btn" type="button" class="btn btn-secondary btn-lg mt-3">Reset Selection</button>
+
+    </form>
+
+{% endblock %}
