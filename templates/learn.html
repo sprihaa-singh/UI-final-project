@@ -23,6 +23,9 @@
     <img id="stroke-animation" src="{{ url_for('static', filename='strokes/' + radical + '.gif') }}" alt="Stroke order animation for {{ radical }}" width="200">
   </div>
 
+  <!-- Instruction for Tracing -->
+  <p class="mt-3">Trace the radical on top of the emoji below.</p>
+
   <!-- Tracing Container: Always visible, no button needed -->
 <div class="tracing-container mt-4" style="position: relative; width: 200px; height: 200px;">
     <div id="emoji-background" style="font-size: 160px; opacity: 0.2; position: absolute; top: 0; left: 0; width: 100%; text-align: center; {% if lesson_id == 1 %}transform: rotate(90deg);{% endif %}">

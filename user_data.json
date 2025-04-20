@@ -1,6 +1,6 @@
 {
   "session_id": "331e5463-f3bb-49ac-bd08-c78f036953c4",
-  "start_time": "2025-04-20T15:21:14.236263",
+  "start_time": "2025-04-20T15:28:29.335125",
   "learning": [
     {
       "lesson_id": 1,
@@ -141,6 +141,71 @@
       "lesson_id": 3,
       "event_type": "entry",
       "timestamp": "2025-04-20T15:23:19.137916"
+    },
+    {
+      "lesson_id": 1,
+      "event_type": "entry",
+      "timestamp": "2025-04-20T15:24:15.399971"
+    },
+    {
+      "lesson_id": 1,
+      "event_type": "next_click",
+      "timestamp": "2025-04-20T15:24:23.013240",
+      "selections": {}
+    },
+    {
+      "lesson_id": 2,
+      "event_type": "entry",
+      "timestamp": "2025-04-20T15:24:23.033675"
+    },
+    {
+      "lesson_id": 2,
+      "event_type": "next_click",
+      "timestamp": "2025-04-20T15:24:30.670930",
+      "selections": {}
+    },
+    {
+      "lesson_id": 3,
+      "event_type": "entry",
+      "timestamp": "2025-04-20T15:24:30.689141"
+    },
+    {
+      "lesson_id": 3,
+      "event_type": "next_click",
+      "timestamp": "2025-04-20T15:24:32.371038",
+      "selections": {}
+    },
+    {
+      "lesson_id": 4,
+      "event_type": "entry",
+      "timestamp": "2025-04-20T15:24:32.405115"
+    },
+    {
+      "lesson_id": 4,
+      "event_type": "next_click",
+      "timestamp": "2025-04-20T15:24:34.652101",
+      "selections": {}
+    },
+    {
+      "lesson_id": 5,
+      "event_type": "entry",
+      "timestamp": "2025-04-20T15:24:34.670983"
+    },
+    {
+      "lesson_id": 5,
+      "event_type": "next_click",
+      "timestamp": "2025-04-20T15:24:36.302713",
+      "selections": {}
+    },
+    {
+      "lesson_id": 1,
+      "event_type": "entry",
+      "timestamp": "2025-04-20T15:28:29.353306"
+    },
+    {
+      "lesson_id": 1,
+      "event_type": "entry",
+      "timestamp": "2025-04-20T15:29:37.730030"
     }
   ],
   "quiz_answers": [],
