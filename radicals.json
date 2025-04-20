@@ -11,7 +11,10 @@
         "洗: wash",
         "海: sea"
       ],
-      "practice": "(Tracing activity placeholder - draw the radical 氵)"
+      "practice": "(Tracing activity placeholder - draw the radical 氵)",
+      "emoji": "💦",
+      "pinyin": "shuǐ",
+      "stroke_order_gif": "water.gif"
     },
     {
       "id": 2,
@@ -24,7 +27,10 @@
         "安: peace",
         "宝: treasure"
       ],
-      "practice": "(Tracing activity placeholder - draw the radical 宀)"
+      "practice": "(Tracing activity placeholder - draw the radical 宀)",
+      "emoji": "🏠",
+      "pinyin": "mián",
+      "stroke_order_gif": "roof.gif"
     },
     {
       "id": 3,
@@ -37,7 +43,10 @@
         "抱: to hug",
         "拉: to pull"
       ],
-      "practice": "(Tracing activity placeholder - draw the radical 扌)"
+      "practice": "(Tracing activity placeholder - draw the radical 扌)",
+      "emoji": "✋",
+      "pinyin": "shǒu",
+      "stroke_order_gif": "hand.gif"
     },
     {
       "id": 4,
@@ -50,7 +59,10 @@
         "烤: to roast",
         "烦: annoyed"
       ],
-      "practice": "(Tracing activity placeholder - draw the radical 火)"
+      "practice": "(Tracing activity placeholder - draw the radical 火)",
+      "emoji": "🔥",
+      "pinyin": "huǒ",
+      "stroke_order_gif": "fire.gif"
     },
     {
       "id": 5,
@@ -63,7 +75,10 @@
         "板: board",
         "根: root"
       ],
-      "practice": "(Tracing activity placeholder - draw the radical 木)"
+      "practice": "(Tracing activity placeholder - draw the radical 木)",
+      "emoji": "🌳",
+      "pinyin": "mù",
+      "stroke_order_gif": "tree.gif"
     }
   ],
   "quiz": [

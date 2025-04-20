@@ -1,28 +1,61 @@
 $(document).ready(function() {
     console.log('jQuery loaded, attaching event listeners');
 
+    // --- ADDED: Canvas Drawing Logic ---
+    const canvas = document.getElementById('tracing-canvas');
+    if (canvas) {
+        const ctx = canvas.getContext('2d');
+        let drawing = false;
+
+        canvas.addEventListener('mousedown', startDraw);
+        canvas.addEventListener('mouseup', endDraw);
+        canvas.addEventListener('mouseout', endDraw);
+        canvas.addEventListener('mousemove', draw);
+
+        function startDraw(e) {
+            drawing = true;
+            ctx.beginPath();
+            ctx.moveTo(e.offsetX, e.offsetY);
+        }
+
+        function endDraw() {
+            drawing = false;
+        }
+
+        function draw(e) {
+            if (!drawing) return;
+            ctx.lineTo(e.offsetX, e.offsetY);
+            ctx.strokeStyle = '#000';
+            ctx.lineWidth = 2;
+            ctx.lineCap = 'round';
+            ctx.stroke();
+        }
+    }
+
+    // --- ADDED: Stroke Order to Tracing Transition Logic ---
+    $('#startTracingBtn').click(function() {
+        // Show the tracing canvas when starting emoji tracing
+        $('#tracingCanvasContainer').show();
+    });
+
     // --- ADDED: Variables for Matching Logic ---
-    let selectedRadical = null; // Store the clicked radical element
-    let selectedRadicalValue = null; // Store its data-value
-    let currentMatches = {}; // Store pairs: { radical: character }
-    const totalPairsNeeded = 5; // Assuming 5 pairs based on radicals.json
+    let selectedRadical = null;
+    let selectedRadicalValue = null;
+    let currentMatches = {};
+    const totalPairsNeeded = 5;
 
     // --- ADDED: Click Handler for Radical Items ---
     $('body').on('click', '.radical-item', function() {
-        // Ignore if already matched
         if ($(this).hasClass('matched')) return;
 
-        // If another radical was already selected, deselect it visually
         if (selectedRadical) {
-            selectedRadical.removeClass('active'); // Bootstrap 'active' class for visual selection
+            selectedRadical.removeClass('active');
         }
 
-        // Select the new radical
         selectedRadical = $(this);
         selectedRadicalValue = selectedRadical.data('value');
         selectedRadical.addClass('active');
 
-        // Update feedback message
         $('#selected-radical').text(selectedRadicalValue);
         $('#matching-feedback').show();
         $('#matching-complete').hide();
@@ -34,10 +67,8 @@ $(document).ready(function() {
         const characterItem = $(this);
         const characterValue = characterItem.data('value');
 
-        // Ignore if already matched
         if (characterItem.hasClass('matched')) return;
 
-        // Check if a radical was selected first
         if (!selectedRadical) {
             alert("Please select a radical first.");
             return;
@@ -45,45 +76,39 @@ $(document).ready(function() {
 
         console.log(`Attempting to match ${selectedRadicalValue} with ${characterValue}`);
 
-        // Store the match
         currentMatches[selectedRadicalValue] = characterValue;
 
-        // Mark both as matched visually
-        selectedRadical.addClass('matched').removeClass('active'); // Mark radical as matched and deactivate
-        selectedRadical.find('.match-indicator').show(); // Show checkmark
-        characterItem.addClass('matched'); // Mark character as matched
-        characterItem.find('.match-indicator').show(); // Show checkmark
+        selectedRadical.addClass('matched').removeClass('active');
+        selectedRadical.find('.match-indicator').show();
+        characterItem.addClass('matched');
+        characterItem.find('.match-indicator').show();
 
-        // Reset selection state
         selectedRadical = null;
         selectedRadicalValue = null;
         $('#matching-feedback').hide();
 
-        // Check if all pairs are matched
         if (Object.keys(currentMatches).length === totalPairsNeeded) {
-             $('#matching-complete').show();
-             $('#submit-matches-btn').prop('disabled', false); // Enable submit button
-             console.log("All pairs matched:", currentMatches);
+            $('#matching-complete').show();
+            $('#submit-matches-btn').prop('disabled', false);
+            console.log("All pairs matched:", currentMatches);
         } else {
-             $('#matching-complete').hide();
-             $('#submit-matches-btn').prop('disabled', true); // Keep disabled
+            $('#matching-complete').hide();
+            $('#submit-matches-btn').prop('disabled', true);
         }
     });
 
-     // --- ADDED: Click Handler for Reset Button ---
+    // --- ADDED: Click Handler for Reset Button ---
     $('body').on('click', '#reset-matches-btn', function() {
         console.log("Resetting matching selection.");
-        // Clear variables
         selectedRadical = null;
         selectedRadicalValue = null;
         currentMatches = {};
 
-        // Reset visual state
         $('.radical-item, .character-item').removeClass('active matched');
         $('.match-indicator').hide();
         $('#matching-feedback, #matching-complete').hide();
-        $('#submit-matches-btn').prop('disabled', true); // Disable submit button
-        $('#matched-pairs').val(''); // Clear hidden input just in case
+        $('#submit-matches-btn').prop('disabled', true);
+        $('#matched-pairs').val('');
     });
 
     // Start button on home page
@@ -106,9 +131,18 @@ $(document).ready(function() {
     });
 
     // Next button on learn page
-    $('#next-button').click(function() {
+    $('#next-button').click(function(e) {
+        e.preventDefault(); // Prevent any default behavior
         console.log('Next button clicked');
         var lessonId = $(this).data('lesson-id');
+        console.log('Lesson ID:', lessonId); // Debug: Verify lessonId is numeric (e.g., 1, 2)
+        
+        if (!lessonId || isNaN(lessonId)) {
+            console.error('Invalid lessonId:', lessonId);
+            alert('Error: Invalid lesson ID');
+            return;
+        }
+    
         $.ajax({
             url: '/learn/' + lessonId,
             type: 'POST',
@@ -116,14 +150,21 @@ $(document).ready(function() {
             data: JSON.stringify({ selections: {} }),
             success: function(response) {
                 console.log('Next AJAX success:', response);
-                window.location.href = response.redirect;
+                if (response.redirect) {
+                    console.log('Redirecting to:', response.redirect);
+                    window.location.href = response.redirect;
+                } else {
+                    console.error('No redirect URL in response:', response);
+                    alert('Error: No redirect URL returned from server');
+                }
             },
             error: function(xhr, status, error) {
-                console.error('Next AJAX error:', status, error);
+                console.error('Next AJAX error:', status, error, xhr.responseText);
                 alert('Error advancing lesson: ' + error);
             }
         });
     });
+
 
     // --- MODIFY Practice form submission Handler ---
     $('body').on('submit', '#practice-form', function(e) {
@@ -134,10 +175,9 @@ $(document).ready(function() {
         var practiceId = form.find('#practice-id').val();
         var practiceType = form.find('#practice-type').val();
         var url = form.attr('action');
-        var data = {}; // Reset data for each submission
+        var data = {};
 
         if (practiceType === 'recall') {
-            // ... (existing recall logic - no changes needed here) ...
             var answer = form.find('#answerInput').val();
             if (answer === null || answer.trim() === '') {
                 alert('Please enter an answer.');
@@ -145,18 +185,13 @@ $(document).ready(function() {
             }
             data.answer = answer.trim();
         } else if (practiceType === 'matching') {
-            // --- MODIFIED: Populate pairs from currentMatches ---
             console.log("Processing matching submission.");
-            // Check if all pairs are selected before allowing submission
-             if (Object.keys(currentMatches).length !== totalPairsNeeded) {
-                 alert("Please match all pairs before submitting.");
-                 return; // Prevent submission
-             }
-            // Populate the data.pairs object from the matches collected by clicks
+            if (Object.keys(currentMatches).length !== totalPairsNeeded) {
+                alert("Please match all pairs before submitting.");
+                return;
+            }
             data.pairs = currentMatches;
-            // Optionally populate the hidden input field as well (for non-AJAX fallback maybe)
             $('#matched-pairs').val(JSON.stringify(currentMatches));
-            // --- End MODIFICATION ---
         } else {
             console.error('Unknown practice type:', practiceType);
             alert('Error: Unknown practice type.');
@@ -165,7 +200,6 @@ $(document).ready(function() {
 
         console.log('Submitting practice data via AJAX:', JSON.stringify(data));
 
-        // AJAX call (existing AJAX logic - no changes needed here)
         $.ajax({
             url: url,
             type: 'POST',
@@ -173,15 +207,14 @@ $(document).ready(function() {
             data: JSON.stringify(data),
             success: function(response) {
                 console.log('Practice AJAX success:', response);
-                 if (response.redirect) {
+                if (response.redirect) {
                     window.location.href = response.redirect;
                 } else {
                     console.warn('No redirect URL received from server.');
                 }
             },
             error: function(xhr, status, error) {
-                // ... existing error handling ...
-                 console.error('Practice AJAX error:', status, error);
+                console.error('Practice AJAX error:', status, error);
                 var errorMsg = 'Error submitting practice answer: ' + error;
                 if (xhr.responseJSON && xhr.responseJSON.message) {
                     errorMsg += "\nServer said: " + xhr.responseJSON.message;
@@ -190,6 +223,7 @@ $(document).ready(function() {
             }
         });
     });
+
     // --- End Practice Form Submission ---
 
     // Quiz form submission
