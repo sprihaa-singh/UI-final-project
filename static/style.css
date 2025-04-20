@@ -4,10 +4,8 @@ body {
     font-family: Arial, sans-serif;
 }
 
-.custom-navbar {
-    background-color: #a3d2ff !important;
-    padding: 15px 0;
-    text-align: center;
+.navbar {
+    background-color: #add8e6 !important;
 }
 
 .nav-links {
