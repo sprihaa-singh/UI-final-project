@@ -127,10 +127,10 @@
       "id": 5,
       "type": "multiple_choice",
       "question": "Using the radical to help you guess, what is the meaning of this character? 說 (shuō)",
-      "character": "說",
-      "pinyin": "shuō",
-      "options": ["Carve", "Dormitory", "Speech", "Boil"],
-      "correct_answer": "Speech"
+      "character": "灯",
+      "pinyin": "dēng",
+      "options": ["Carve", "Dormitory", "Lamp", "Boil"],
+      "correct_answer": "Lamp"
     }
   ],
   "practice": [

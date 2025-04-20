@@ -1,166 +1,143 @@
 {
-  "session_id": "2c72ee62-32b0-44a6-ad64-33b771732250",
-  "start_time": "2025-04-20T15:03:12.682420",
+  "session_id": "331e5463-f3bb-49ac-bd08-c78f036953c4",
+  "start_time": "2025-04-20T15:12:12.238549",
   "learning": [
     {
-      "lesson_id": 2,
-      "event_type": "entry",
-      "timestamp": "2025-04-20T14:59:46.834246"
-    },
-    {
-      "lesson_id": 2,
+      "lesson_id": 1,
       "event_type": "next_click",
-      "timestamp": "2025-04-20T14:59:48.141810",
+      "timestamp": "2025-04-20T15:06:44.314913",
       "selections": {}
     },
     {
       "lesson_id": 2,
+      "event_type": "entry",
+      "timestamp": "2025-04-20T15:06:44.326429"
+    },
+    {
+      "lesson_id": 2,
+      "event_type": "entry",
+      "timestamp": "2025-04-20T15:06:44.339976"
+    },
+    {
+      "lesson_id": 1,
+      "event_type": "entry",
+      "timestamp": "2025-04-20T15:06:50.377899"
+    },
+    {
+      "lesson_id": 1,
       "event_type": "next_click",
-      "timestamp": "2025-04-20T14:59:48.145276",
+      "timestamp": "2025-04-20T15:06:58.584371",
+      "selections": {}
+    },
+    {
+      "lesson_id": 2,
+      "event_type": "entry",
+      "timestamp": "2025-04-20T15:06:58.602559"
+    },
+    {
+      "lesson_id": 1,
+      "event_type": "entry",
+      "timestamp": "2025-04-20T15:09:15.572877"
+    },
+    {
+      "lesson_id": 1,
+      "event_type": "next_click",
+      "timestamp": "2025-04-20T15:09:35.938625",
+      "selections": {}
+    },
+    {
+      "lesson_id": 2,
+      "event_type": "entry",
+      "timestamp": "2025-04-20T15:09:35.961613"
+    },
+    {
+      "lesson_id": 2,
+      "event_type": "next_click",
+      "timestamp": "2025-04-20T15:09:37.752051",
       "selections": {}
     },
     {
       "lesson_id": 3,
       "event_type": "entry",
-      "timestamp": "2025-04-20T14:59:48.160757"
-    },
-    {
-      "lesson_id": 3,
-      "event_type": "entry",
-      "timestamp": "2025-04-20T14:59:48.166900"
+      "timestamp": "2025-04-20T15:09:37.770436"
     },
     {
       "lesson_id": 3,
       "event_type": "next_click",
-      "timestamp": "2025-04-20T14:59:48.691222",
+      "timestamp": "2025-04-20T15:09:41.116097",
       "selections": {}
     },
     {
       "lesson_id": 4,
       "event_type": "entry",
-      "timestamp": "2025-04-20T14:59:48.705288"
+      "timestamp": "2025-04-20T15:09:41.133031"
     },
     {
       "lesson_id": 4,
       "event_type": "next_click",
-      "timestamp": "2025-04-20T14:59:49.223620",
+      "timestamp": "2025-04-20T15:09:41.779773",
       "selections": {}
     },
     {
       "lesson_id": 5,
       "event_type": "entry",
-      "timestamp": "2025-04-20T14:59:49.237219"
+      "timestamp": "2025-04-20T15:09:41.792333"
     },
     {
       "lesson_id": 5,
       "event_type": "next_click",
-      "timestamp": "2025-04-20T14:59:49.889750",
+      "timestamp": "2025-04-20T15:09:42.404759",
       "selections": {}
     },
     {
       "lesson_id": 1,
       "event_type": "entry",
-      "timestamp": "2025-04-20T14:59:52.362652"
-    },
-    {
-      "lesson_id": 1,
-      "event_type": "next_click",
-      "timestamp": "2025-04-20T14:59:59.679695",
-      "selections": {}
-    },
-    {
-      "lesson_id": 2,
-      "event_type": "entry",
-      "timestamp": "2025-04-20T14:59:59.703006"
-    },
-    {
-      "lesson_id": 2,
-      "event_type": "next_click",
-      "timestamp": "2025-04-20T15:00:06.108314",
-      "selections": {}
-    },
-    {
-      "lesson_id": 3,
-      "event_type": "entry",
-      "timestamp": "2025-04-20T15:00:06.126054"
-    },
-    {
-      "lesson_id": 3,
-      "event_type": "next_click",
-      "timestamp": "2025-04-20T15:00:14.675112",
-      "selections": {}
-    },
-    {
-      "lesson_id": 4,
-      "event_type": "entry",
-      "timestamp": "2025-04-20T15:00:14.689472"
-    },
-    {
-      "lesson_id": 4,
-      "event_type": "next_click",
-      "timestamp": "2025-04-20T15:00:22.358555",
-      "selections": {}
-    },
-    {
-      "lesson_id": 5,
-      "event_type": "entry",
-      "timestamp": "2025-04-20T15:00:22.379144"
-    },
-    {
-      "lesson_id": 5,
-      "event_type": "next_click",
-      "timestamp": "2025-04-20T15:00:30.223653",
-      "selections": {}
-    },
-    {
-      "lesson_id": 1,
-      "event_type": "entry",
-      "timestamp": "2025-04-20T15:01:22.429122"
-    },
-    {
-      "lesson_id": 1,
-      "event_type": "entry",
-      "timestamp": "2025-04-20T15:02:49.232711"
-    },
-    {
-      "lesson_id": 1,
-      "event_type": "next_click",
-      "timestamp": "2025-04-20T15:02:53.886342",
-      "selections": {}
-    },
-    {
-      "lesson_id": 2,
-      "event_type": "entry",
-      "timestamp": "2025-04-20T15:02:53.903265"
-    },
-    {
-      "lesson_id": 2,
-      "event_type": "next_click",
-      "timestamp": "2025-04-20T15:03:06.526585",
-      "selections": {}
-    },
-    {
-      "lesson_id": 3,
-      "event_type": "entry",
-      "timestamp": "2025-04-20T15:03:06.552790"
-    },
-    {
-      "lesson_id": 1,
-      "event_type": "entry",
-      "timestamp": "2025-04-20T15:03:12.700438"
-    },
-    {
-      "lesson_id": 1,
-      "event_type": "next_click",
-      "timestamp": "2025-04-20T15:03:18.063731",
-      "selections": {}
-    },
-    {
-      "lesson_id": 2,
-      "event_type": "entry",
-      "timestamp": "2025-04-20T15:03:18.084019"
+      "timestamp": "2025-04-20T15:12:12.253964"
     }
   ],
-  "quiz_answers": [],
+  "quiz_answers": [
+    {
+      "question_id": 1,
+      "user_answer": "Wood",
+      "correct_answer": "Ocean",
+      "is_correct": false,
+      "timestamp": "2025-04-20T15:12:15.313492"
+    },
+    {
+      "question_id": 2,
+      "user_answer": "Burn",
+      "correct_answer": "Push",
+      "is_correct": false,
+      "timestamp": "2025-04-20T15:12:16.200077"
+    },
+    {
+      "question_id": 3,
+      "user_answer": "宀 (Roof)",
+      "correct_answer": "木 (Tree)",
+      "is_correct": false,
+      "timestamp": "2025-04-20T15:12:18.805407"
+    },
+    {
+      "question_id": 4,
+      "user_answer": "宀",
+      "correct_answer": "氵",
+      "is_correct": false,
+      "timestamp": "2025-04-20T15:12:19.921312"
+    },
+    {
+      "question_id": 5,
+      "user_answer": "Lamp",
+      "correct_answer": "Speech",
+      "is_correct": false,
+      "timestamp": "2025-04-20T15:12:22.957249"
+    },
+    {
+      "question_id": 5,
+      "user_answer": "Lamp",
+      "correct_answer": "Lamp",
+      "is_correct": true,
+      "timestamp": "2025-04-20T15:12:31.921338"
+    }
+  ],
   "practice_answers": []
 }
