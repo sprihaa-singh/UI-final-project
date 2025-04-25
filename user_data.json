@@ -1,6 +1,6 @@
 {
   "session_id": "331e5463-f3bb-49ac-bd08-c78f036953c4",
-  "start_time": "2025-04-20T15:28:29.335125",
+  "start_time": "2025-04-25T14:22:59.560937",
   "learning": [
     {
       "lesson_id": 1,
@@ -206,6 +206,21 @@
       "lesson_id": 1,
       "event_type": "entry",
       "timestamp": "2025-04-20T15:29:37.730030"
+    },
+    {
+      "lesson_id": 1,
+      "event_type": "entry",
+      "timestamp": "2025-04-25T14:22:59.581296"
+    },
+    {
+      "lesson_id": 1,
+      "event_type": "entry",
+      "timestamp": "2025-04-25T14:23:02.509404"
+    },
+    {
+      "lesson_id": 1,
+      "event_type": "entry",
+      "timestamp": "2025-04-25T14:23:04.572266"
     }
   ],
   "quiz_answers": [],

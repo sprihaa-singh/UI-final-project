@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Noto Sans', sans-serif;
 }
 
 .navbar {
@@ -22,12 +22,13 @@ body {
 }
 
 .nav-link {
-    font-family: 'Caveat', cursive !important;
+    font-family: 'Noto Sans', sans-serif !important;
     font-size: 24px !important;
     color: #000 !important;
     text-decoration: none !important;
     padding: 5px 10px !important;
 }
+
 
 .nav-link:hover {
     color: #555 !important;

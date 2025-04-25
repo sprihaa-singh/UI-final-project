@@ -1,6 +1,10 @@
 {% extends "base.html" %}
-   {% block content %}
-       <h1>Welcome to Chinese Radicals</h1>
-       <p>Learn about Chinese radicals and test your knowledge!</p>
-       <button id="start-button" class="btn btn-primary">Start</button>
-   {% endblock %}
+{% block content %}
+<div class="d-flex align-items-center justify-content-center" style="min-height: 80vh;">
+  <div class="card shadow p-5 text-center" style="max-width: 600px; width: 100%;">
+    <h1 class="mb-4 fw-bold" style="font-size: 2.5rem;">Learn <span style="color: #007bff;">Chinese Radicals</span>!</h1>
+    <p class="mb-4 fs-5">Learn about Chinese radicals, master their meanings, and test your skills through practice and quizzes.</p>
+    <button id="start-button" class="btn btn-primary btn-lg" style="padding: 10px 30px; font-size: 1.25rem;">Start Learning</button>
+  </div>
+</div>
+{% endblock %}
