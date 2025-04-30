@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+  {# Use lesson_id for consistency, it represents the radical's ID #}
+  <h2 class="mb-4">Learn Radical: {{ lesson.radical }} (Part 1/2)</h2>
+
+  <div class="mb-3">
+    <strong>Meaning:</strong> {{ lesson.meaning }}<br>
+    <strong>Pinyin:</strong> {{ lesson.pinyin }}<br>
+    {% if lesson.examples %}
+    <strong>Example Characters:</strong><br>
+    <ul>
+      {% for example in lesson.examples %}
+        {% set parts = example.split(': ') %}
+        {% if parts|length == 2 %}
+          <li>{{ parts[0] }} ({{ parts[1] }})</li>
+        {% else %}
+          <li>{{ example }}</li> {# Fallback if format is different #}
+        {% endif %}
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% if lesson.description %}
+    <strong>Description:</strong> {{ lesson.description }}
+    {% endif %}
+  </div>
+
+  <div class="mt-4">
+      {# Pass both lesson_id and part for the AJAX call #}
+      <button class="btn btn-primary" id="next-button" data-lesson-id="{{ lesson_id }}" data-part="0">Next</button>
+  </div>
+</div>
+{# Ensure necessary JS is included via base.html or add specific script links if needed #}
+{% endblock %}

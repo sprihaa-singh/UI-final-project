@@ -132,27 +132,34 @@ $(document).ready(function() {
 
     // Next button on learn page
     $('#next-button').click(function(e) {
-        e.preventDefault(); // Prevent any default behavior
+        e.preventDefault(); // Prevent default button action
         console.log('Next button clicked');
+        // Get both lesson ID and part from data attributes
         var lessonId = $(this).data('lesson-id');
-        console.log('Lesson ID:', lessonId); // Debug: Verify lessonId is numeric (e.g., 1, 2)
-        
-        if (!lessonId || isNaN(lessonId)) {
-            console.error('Invalid lessonId:', lessonId);
-            alert('Error: Invalid lesson ID');
+        var part = $(this).data('part'); // Get the part (0 or 1)
+        console.log('Lesson ID:', lessonId, 'Part:', part);
+
+        // Basic validation
+        if (typeof lessonId === 'undefined' || isNaN(lessonId) || typeof part === 'undefined' || isNaN(part)) {
+            console.error('Invalid lessonId or part:', lessonId, part);
+            alert('Error: Invalid lesson ID or part identifier');
             return;
         }
-    
+
+        // Construct the correct URL for the POST request
+        var postUrl = '/learn/' + lessonId + '-' + part; // Matches the new route pattern
+
         $.ajax({
-            url: '/learn/' + lessonId,
+            url: postUrl, // Send POST to the correct URL
             type: 'POST',
             contentType: 'application/json',
+            // Include selections if you capture tracing data, otherwise empty object {}
             data: JSON.stringify({ selections: {} }),
             success: function(response) {
                 console.log('Next AJAX success:', response);
                 if (response.redirect) {
                     console.log('Redirecting to:', response.redirect);
-                    window.location.href = response.redirect;
+                    window.location.href = response.redirect; // Redirect browser
                 } else {
                     console.error('No redirect URL in response:', response);
                     alert('Error: No redirect URL returned from server');
@@ -164,7 +171,6 @@ $(document).ready(function() {
             }
         });
     });
-
 
     // --- MODIFY Practice form submission Handler ---
     $('body').on('submit', '#practice-form', function(e) {

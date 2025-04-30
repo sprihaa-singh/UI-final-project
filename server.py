@@ -10,6 +10,8 @@ app = Flask(__name__)
 RADICALS_DATA_FILE = 'radicals.json'
 USER_DATA_FILE = 'user_data.json'
 
+# --- Helper Functions (Load/Save Data, Reset Answers) ---
+
 # Load radicals data
 def load_radicals_data():
     try:
@@ -30,13 +32,9 @@ def load_user_data():
                 return json.load(f)
         except json.JSONDecodeError:
             print(f"Error decoding {USER_DATA_FILE}. Starting fresh.")
-            return {
-                "session_id": str(uuid.uuid4()),
-                "start_time": None,
-                "learning": [],
-                "quiz_answers": [],
-                "practice_answers": []
-            }
+            # Fallback to default structure
+            pass
+    # Default structure if file doesn't exist or is invalid
     return {
         "session_id": str(uuid.uuid4()),
         "start_time": None,
@@ -60,70 +58,103 @@ def reset_practice_answers(user_data):
     user_data['practice_answers'] = []
     return user_data
 
+# --- Flask Routes ---
+
 # Home page route
 @app.route('/', methods=['GET', 'POST'])
 def home():
     user_data = load_user_data()
+    radicals_data = load_radicals_data() # Load radicals data
+    radicals_list = radicals_data.get('radicals', []) # Get the list for the dropdown
+
+    # Reset data on initial visit (GET) or explicit start (POST)
     user_data = reset_quiz_answers(user_data)
     user_data = reset_practice_answers(user_data)
-    
+
     if request.method == 'POST':
         user_data['start_time'] = datetime.now().isoformat()
         save_user_data(user_data)
-        return jsonify({"message": "Session started", "redirect": url_for('learn', lesson_id=1)})
-    
-    save_user_data(user_data)
-    return render_template('home.html', session_id=user_data['session_id'])
+        # Redirect to the first learn page; 'learn' route will handle loading radicals_list
+        return jsonify({"message": "Session started", "redirect": url_for('learn', lesson_id=1, part=0)})
+
+    # Handle GET request (initial page load)
+    save_user_data(user_data) # Save potentially reset data
+    # Pass radicals_list needed by base.html
+    return render_template('home.html',
+                           session_id=user_data.get('session_id', ''),
+                           radicals_list=radicals_list)
 
 # Learning route
-@app.route('/learn/<int:lesson_id>', methods=['GET', 'POST'])
-def learn(lesson_id):
+# Replace the existing '/learn/<int:lesson_id>' route
+@app.route('/learn/<int:lesson_id>-<int:part>', methods=['GET', 'POST'])
+def learn(lesson_id, part): # Add part parameter
     radicals_data = load_radicals_data()
     user_data = load_user_data()
+    radicals_list = radicals_data.get('radicals', [])
+    num_lessons = len(radicals_list)
 
-    num_lessons = len(radicals_data.get('radicals', []))
+    # Validate lesson_id and part
+    if lesson_id < 1 or lesson_id > num_lessons or part not in [0, 1]:
+        return "Invalid lesson ID or part", 404
 
-    if lesson_id < 1 or lesson_id > num_lessons:
-        return "Invalid lesson ID", 404
+    lesson_data = radicals_list[lesson_id - 1] # Get data for the radical
 
+    # Handle POST request (clicking 'Next')
     if request.method == 'POST':
         interaction = {
             "lesson_id": lesson_id,
+            "part": part, # Record which part was completed
             "event_type": "next_click",
             "timestamp": datetime.now().isoformat(),
-            "selections": request.json.get('selections', {})
+            "selections": request.json.get('selections', {}) # Keep if tracing data is sent
         }
         user_data.setdefault('learning', []).append(interaction)
-
-        next_lesson = lesson_id + 1
-        if next_lesson <= num_lessons:
-            redirect_url = url_for('learn', lesson_id=next_lesson)
-        else:
-            redirect_url = url_for('practice', practice_id=1)
-
         save_user_data(user_data)
+
+        # Determine the next URL based on current lesson_id and part
+        redirect_url = None
+        if part == 0:
+            # Go from <n>-0 to <n>-1
+            redirect_url = url_for('learn', lesson_id=lesson_id, part=1)
+        elif part == 1:
+            next_lesson_id = lesson_id + 1
+            if next_lesson_id <= num_lessons:
+                # Go from <n>-1 to <n+1>-0
+                redirect_url = url_for('learn', lesson_id=next_lesson_id, part=0)
+            else:
+                # Go from last lesson's part 1 to practice
+                redirect_url = url_for('practice', practice_id=1)
+
         return jsonify({"message": "Interaction recorded", "redirect": redirect_url})
 
-
+    # Handle GET request (displaying the lesson page)
     entry_event = {
         "lesson_id": lesson_id,
+        "part": part, # Record which part was viewed
         "event_type": "entry",
         "timestamp": datetime.now().isoformat()
     }
     user_data.setdefault('learning', []).append(entry_event)
     save_user_data(user_data)
 
-    lesson_data = radicals_data.get('radicals', [])[lesson_id - 1]
-    radical = lesson_data['radical']  # Get the radical from the lesson data
+    # Choose the correct template based on 'part'
+    if part == 0:
+        template_name = 'learn_part0.html'
+    else: # part == 1
+        template_name = 'learn_part1.html'
 
-    return render_template('learn.html', lesson_id=lesson_id, lesson=lesson_data, radical=radical)
-
+    return render_template(template_name,
+                           lesson_id=lesson_id,
+                           part=part,
+                           lesson=lesson_data,
+                           radicals_list=radicals_list) # Pass radicals_list for base.html
 
 # Practice route
 @app.route('/practice/<int:practice_id>', methods=['GET', 'POST'])
 def practice(practice_id):
-    radicals_data = load_radicals_data()
+    radicals_data = load_radicals_data() # Load radicals data
     practice_data = radicals_data.get('practice', [])
+    radicals_list = radicals_data.get('radicals', []) # Get the list for the dropdown
     num_practice = len(practice_data)
 
     if practice_id < 1 or practice_id > num_practice:
@@ -131,45 +162,67 @@ def practice(practice_id):
 
     practice_item = practice_data[practice_id - 1]
 
+    # Handle POST request (submitting an answer)
     if request.method == 'POST':
         user_data = load_user_data()
         user_answer = None
         is_correct = False
 
-        if practice_item['type'] == 'recall':
-            user_answer = request.json.get('answer', '').strip()
-            correct_answer = practice_item.get('correct_answer', '')
-            is_correct = user_answer.lower() == correct_answer.lower()
+        try:
+            if practice_item['type'] == 'recall':
+                user_answer = request.json.get('answer', '').strip()
+                correct_answer = practice_item.get('correct_answer', '')
+                is_correct = user_answer.lower() == correct_answer.lower()
 
-        elif practice_item['type'] == 'matching':
-            user_answer = request.json.get('pairs', {})
-            is_correct = user_answer == practice_item.get('correct_pairs', {})
+            elif practice_item['type'] == 'matching':
+                user_answer = request.json.get('pairs', {}) # Expecting a dictionary
+                correct_pairs = practice_item.get('correct_pairs', {})
+                # Simple equality check for dictionaries
+                is_correct = user_answer == correct_pairs
+            else:
+                 # Handle unknown type if necessary
+                 print(f"Unknown practice type: {practice_item.get('type')}")
 
-        answer_data = {
-            "practice_id": practice_id,
-            "type": practice_item['type'],
-            "user_answer": user_answer,
-            "is_correct": is_correct,
-            "timestamp": datetime.now().isoformat()
-        }
-        user_data.setdefault('practice_answers', []).append(answer_data)
-        save_user_data(user_data)
+            answer_data = {
+                "practice_id": practice_id,
+                "type": practice_item.get('type'),
+                "user_answer": user_answer,
+                "is_correct": is_correct,
+                "timestamp": datetime.now().isoformat()
+            }
+            user_data.setdefault('practice_answers', []).append(answer_data)
+            save_user_data(user_data)
 
-        return jsonify(
-            {"message": "Answer recorded", "redirect": url_for('practice_feedback', practice_id=practice_id)})
+            # Redirect to feedback page for this practice item
+            return jsonify(
+                {"message": "Answer recorded", "redirect": url_for('practice_feedback', practice_id=practice_id)})
 
-    if practice_item['type'] == 'recall':
-        return render_template('practice_recall.html', practice_id=practice_id, item=practice_item, total_items=num_practice)
-    elif practice_item['type'] == 'matching':
-        return render_template('practice_matching.html', practice_id=practice_id, item=practice_item, total_items=num_practice)
+        except Exception as e:
+            print(f"Error processing practice submission: {e}")
+            # Return an error response if something goes wrong
+            return jsonify({"message": f"Error processing answer: {e}"}), 500
+
+
+    # Handle GET request (displaying the practice question)
+    # Pass radicals_list needed by base.html
+    template_name = f"practice_{practice_item.get('type', 'unknown')}.html"
+    # Check if template exists for safety, or handle unknown type
+    if practice_item.get('type') in ['recall', 'matching']:
+        return render_template(template_name,
+                           practice_id=practice_id,
+                           item=practice_item,
+                           total_items=num_practice,
+                           radicals_list=radicals_list)
     else:
-        return f"Unknown practice type '{practice_item['type']}' for ID {practice_id}", 500
+        return f"Unknown or unsupported practice type '{practice_item.get('type')}' for ID {practice_id}", 500
+
 
 # Practice feedback route
 @app.route('/practice/feedback/<int:practice_id>')
 def practice_feedback(practice_id):
-    radicals_data = load_radicals_data()
+    radicals_data = load_radicals_data() # Load radicals data
     practice_data = radicals_data.get('practice', [])
+    radicals_list = radicals_data.get('radicals', []) # Get the list for the dropdown
     num_practice = len(practice_data)
 
     if practice_id < 1 or practice_id > num_practice:
@@ -178,57 +231,75 @@ def practice_feedback(practice_id):
     user_data = load_user_data()
     user_answers = user_data.get('practice_answers', [])
 
+    # Find the most recent answer for this specific practice_id
     last_answer_data = None
     for answer in reversed(user_answers):
         if answer.get('practice_id') == practice_id:
             last_answer_data = answer
             break
 
+    # If no answer found for this ID, redirect back to the question
     if not last_answer_data:
         return redirect(url_for('practice', practice_id=practice_id))
 
     practice_item = practice_data[practice_id - 1]
-    correct_answer_details = practice_item.get('correct_answer') if practice_item['type'] == 'recall' else practice_item.get('correct_pairs')
+    correct_answer_details = None
+    if practice_item.get('type') == 'recall':
+        correct_answer_details = practice_item.get('correct_answer')
+    elif practice_item.get('type') == 'matching':
+         correct_answer_details = practice_item.get('correct_pairs')
 
+    # Determine URL for the 'Next' button
     next_practice_id = practice_id + 1
     if next_practice_id > num_practice:
+        # After last practice item, go to the first quiz question
         next_url = url_for('quiz', question_id=1)
     else:
+        # Go to the next practice item
         next_url = url_for('practice', practice_id=next_practice_id)
 
+    # Pass radicals_list needed by base.html
     return render_template('practice_feedback.html',
                            practice_id=practice_id,
                            item=practice_item,
                            user_answer_data=last_answer_data,
                            correct_answer_details=correct_answer_details,
                            next_url=next_url,
-                           total_items=num_practice)
+                           total_items=num_practice,
+                           radicals_list=radicals_list)
+
 
 # Quiz route
 @app.route('/quiz/<int:question_id>', methods=['GET', 'POST'])
 def quiz(question_id):
-    radicals_data = load_radicals_data()
+    radicals_data = load_radicals_data() # Load radicals data
     user_data = load_user_data()
     quiz_data = radicals_data.get('quiz', [])
+    radicals_list = radicals_data.get('radicals', []) # Get the list for the dropdown
     num_questions = len(quiz_data)
 
+    # Reset answers only when starting the quiz (GET request for question 1)
     if question_id == 1 and request.method == 'GET':
         user_data = reset_quiz_answers(user_data)
-        save_user_data(user_data)
+        save_user_data(user_data) # Save the reset state
 
     if question_id < 1 or question_id > num_questions:
         return "Invalid question ID", 404
 
     quiz_question = quiz_data[question_id - 1]
 
+    # Handle POST request (submitting an answer)
     if request.method == 'POST':
         user_answer = request.json.get('answer')
-        is_correct = user_answer == quiz_question['correct_answer']
+        is_correct = False
+        # Ensure correct_answer exists before comparing
+        if 'correct_answer' in quiz_question:
+            is_correct = (user_answer == quiz_question['correct_answer'])
 
         answer_data = {
             "question_id": question_id,
             "user_answer": user_answer,
-            "correct_answer": quiz_question['correct_answer'],
+            "correct_answer": quiz_question.get('correct_answer', 'N/A'), # Handle missing key
             "is_correct": is_correct,
             "timestamp": datetime.now().isoformat()
         }
@@ -237,30 +308,54 @@ def quiz(question_id):
 
         next_question = question_id + 1
         if next_question <= num_questions:
-            return jsonify({"message": "Answer recorded", "redirect": url_for('quiz', question_id=next_question)})
+            redirect_url = url_for('quiz', question_id=next_question)
         else:
-            return jsonify({"message": "Quiz complete", "redirect": url_for('results')})
+            # End of quiz, go to results
+            redirect_url = url_for('results')
 
-    return render_template('quiz.html', question_id=question_id, question=quiz_question, total_questions=num_questions)
+        return jsonify({"message": "Answer recorded", "redirect": redirect_url})
+
+    # Handle GET request (displaying the quiz question)
+    # Pass radicals_list needed by base.html
+    return render_template('quiz.html',
+                           question_id=question_id,
+                           question=quiz_question,
+                           total_questions=num_questions,
+                           radicals_list=radicals_list)
+
 
 # Results route
 @app.route('/results', methods=['GET'])
 def results():
     user_data = load_user_data()
+    radicals_data = load_radicals_data() # Load radicals data
+    radicals_list = radicals_data.get('radicals', []) # Get the list for the dropdown
     quiz_answers = user_data.get('quiz_answers', [])
+    quiz_data = radicals_data.get('quiz', [])
+    num_questions_in_quiz = len(quiz_data) # Use actual number of quiz questions
 
-    num_questions_in_quiz = 5
-    current_attempt_answers = quiz_answers[-num_questions_in_quiz:] if len(quiz_answers) >= num_questions_in_quiz else quiz_answers
+    # Ensure we only consider the answers from the most recent attempt
+    # (Handles cases where user might go back and retake the quiz without resetting via home)
+    current_attempt_answers = []
+    if len(quiz_answers) >= num_questions_in_quiz:
+        current_attempt_answers = quiz_answers[-num_questions_in_quiz:]
+    else:
+         # If fewer answers than questions, consider all recorded answers for this session
+         current_attempt_answers = quiz_answers
 
     correct_count = sum(1 for answer in current_attempt_answers if answer.get('is_correct'))
     total_questions_attempted = len(current_attempt_answers)
     score = (correct_count / total_questions_attempted * 100) if total_questions_attempted > 0 else 0
 
+    # Pass radicals_list needed by base.html
     return render_template('results.html',
                            score=score,
-                           total_questions=total_questions_attempted,
+                           total_questions=total_questions_attempted, # Show questions answered in this attempt
                            correct_answers=correct_count,
-                           answers=current_attempt_answers)
+                           answers=current_attempt_answers,
+                           radicals_list=radicals_list)
 
+# --- Main Execution Guard ---
 if __name__ == '__main__':
+    # Use a port other than the default 5000 if needed
     app.run(debug=True, port=5001)
