@@ -1,0 +1,92 @@
+{
+  "session_id": "38c8e8cd-c450-46d8-b9ce-845de41591a4",
+  "start_time": "2025-05-01T11:02:21.665475",
+  "learning": [
+    {
+      "lesson_id": 1,
+      "part": 0,
+      "event_type": "entry",
+      "timestamp": "2025-05-01T11:02:21.682824"
+    },
+    {
+      "lesson_id": 1,
+      "part": 0,
+      "event_type": "next_click",
+      "timestamp": "2025-05-01T11:02:46.699999",
+      "selections": {}
+    },
+    {
+      "lesson_id": 1,
+      "part": 1,
+      "event_type": "entry",
+      "timestamp": "2025-05-01T11:02:46.720913"
+    },
+    {
+      "lesson_id": 1,
+      "part": 1,
+      "event_type": "next_click",
+      "timestamp": "2025-05-01T11:02:48.590564",
+      "selections": {}
+    },
+    {
+      "lesson_id": 2,
+      "part": 0,
+      "event_type": "entry",
+      "timestamp": "2025-05-01T11:02:48.602107"
+    },
+    {
+      "lesson_id": 2,
+      "part": 0,
+      "event_type": "next_click",
+      "timestamp": "2025-05-01T11:02:50.710929",
+      "selections": {}
+    },
+    {
+      "lesson_id": 2,
+      "part": 1,
+      "event_type": "entry",
+      "timestamp": "2025-05-01T11:02:50.725930"
+    },
+    {
+      "lesson_id": 2,
+      "part": 1,
+      "event_type": "next_click",
+      "timestamp": "2025-05-01T11:02:51.905695",
+      "selections": {}
+    },
+    {
+      "lesson_id": 3,
+      "part": 0,
+      "event_type": "entry",
+      "timestamp": "2025-05-01T11:02:51.922117"
+    },
+    {
+      "lesson_id": 5,
+      "part": 0,
+      "event_type": "entry",
+      "timestamp": "2025-05-01T11:02:53.506977"
+    },
+    {
+      "lesson_id": 5,
+      "part": 0,
+      "event_type": "next_click",
+      "timestamp": "2025-05-01T11:02:54.533448",
+      "selections": {}
+    },
+    {
+      "lesson_id": 5,
+      "part": 1,
+      "event_type": "entry",
+      "timestamp": "2025-05-01T11:02:54.550871"
+    },
+    {
+      "lesson_id": 5,
+      "part": 1,
+      "event_type": "next_click",
+      "timestamp": "2025-05-01T11:02:55.494653",
+      "selections": {}
+    }
+  ],
+  "quiz_answers": [],
+  "practice_answers": []
+}

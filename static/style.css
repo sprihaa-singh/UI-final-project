@@ -78,14 +78,14 @@ body {
 }
 
 .btn-primary {
-    background-color: #a3d2ff;
-    border-color: #a3d2ff;
+    background-color: #add8e6;
+    border-color: #add8e6;
     color: #000;
 }
 
 .btn-primary:hover {
-    background-color: #8bbdff;
-    border-color: #8bbdff;
+    background-color: #94ccde;
+    border-color: #94ccde;
 }
 
 .character-container {
