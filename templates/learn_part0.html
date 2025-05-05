@@ -2,7 +2,6 @@
 
 {% block content %}
 <div class="container mt-5">
-  {# Use lesson_id for consistency, it represents the radical's ID #}
   <h2 class="mb-4">Learn Radical: {{ lesson.radical }} (Part 1/2)</h2>
 
   <div class="mb-3">
@@ -10,14 +9,18 @@
     <strong>Pinyin:</strong> {{ lesson.pinyin }}<br>
     {% if lesson.examples %}
     <strong>Example Characters:</strong><br>
-    <ul>
+    {# Updated class "example-characters-list" to the ul tag #}
+    <ul class="example-characters-list list-unstyled"> {# Added list-unstyled for cleaner look #}
       {% for example in lesson.examples %}
-        {% set parts = example.split(': ') %}
-        {% if parts|length == 2 %}
-          <li>{{ parts[0] }} ({{ parts[1] }})</li>
-        {% else %}
-          <li>{{ example }}</li> {# Fallback if format is different #}
-        {% endif %}
+        {# Now expecting example to be an object with char, meaning, image #}
+        <li class="d-flex align-items-center mb-2"> {# Use flexbox for alignment #}
+          <span class="chinese-char me-2">{{ example.char }}</span> {# Added margin #}
+          {# Add the image tag - assumes images are in static/icons/ #}
+          <img src="{{ url_for('static', filename='icons/' + example.image) }}"
+               alt="{{ example.meaning }}"
+               class="example-icon me-2"> {# Added class for styling and margin #}
+          <span>({{ example.meaning }})</span>
+        </li>
       {% endfor %}
     </ul>
     {% endif %}
@@ -27,9 +30,7 @@
   </div>
 
   <div class="mt-4">
-      {# Pass both lesson_id and part for the AJAX call #}
       <button class="btn btn-primary" id="next-button" data-lesson-id="{{ lesson_id }}" data-part="0">Next</button>
   </div>
 </div>
-{# Ensure necessary JS is included via base.html or add specific script links if needed #}
 {% endblock %}

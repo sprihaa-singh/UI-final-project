@@ -6,10 +6,10 @@
       "meaning": "Water",
       "description": "This radical mimics the shape of flowing water. The water radical can be found in characters with meanings related to water or liquid.",
       "examples": [
-        "汗: sweat",
-        "江: river",
-        "洗: wash",
-        "海: sea"
+        {"char": "汗", "meaning": "sweat", "image": "Sweat.png"},
+        {"char": "江", "meaning": "river", "image": "River.png"},
+        {"char": "洗", "meaning": "wash", "image": "Wash.png"},
+        {"char": "海", "meaning": "sea", "image": "Sea.png"}
       ],
       "practice": "(Tracing activity placeholder - draw the radical 氵)",
       "emoji": "💦",
@@ -22,10 +22,10 @@
       "meaning": "Roof",
       "description": "This radical mimics the shape of a roof over a house. The roof radical can be found in characters with meanings related to houses or buildings.",
       "examples": [
-        "家: house",
-        "室: room",
-        "安: peace",
-        "宝: treasure"
+        {"char": "家", "meaning": "house", "image": "House.png"},
+        {"char": "室", "meaning": "room", "image": "Room.png"},
+        {"char": "安", "meaning": "peace", "image": "Peace.png"},
+        {"char": "宝", "meaning": "treasure", "image": "Treasure.png"}
       ],
       "practice": "(Tracing activity placeholder - draw the radical 宀)",
       "emoji": "🏠",
@@ -38,10 +38,10 @@
       "meaning": "Hand",
       "description": "This radical mimics the shape of a hand. The hand radical can be found in characters with meanings related to actions done with hands.",
       "examples": [
-        "拍: to pat",
-        "打: to hit",
-        "抱: to hug",
-        "拉: to pull"
+        {"char": "拍", "meaning": "to pat", "image": "Pat.png"},
+        {"char": "打", "meaning": "to hit", "image": "Hit.png"},
+        {"char": "抱", "meaning": "to hug", "image": "Hug.png"},
+        {"char": "拉", "meaning": "to pull", "image": "Pull.png"}
       ],
       "practice": "(Tracing activity placeholder - draw the radical 扌)",
       "emoji": "✋",
@@ -54,10 +54,10 @@
       "meaning": "Fire",
       "description": "This radical mimics the shape of flames. The fire radical can be found in characters with meanings related to fire or heat.",
       "examples": [
-        "灯: lamp",
-        "烟: smoke",
-        "烤: to roast",
-        "烦: annoyed"
+        {"char": "灯", "meaning": "lamp", "image": "Lamp.png"},
+        {"char": "烟", "meaning": "smoke", "image": "Smoke.png"},
+        {"char": "烤", "meaning": "to roast", "image": "Roast.png"},
+        {"char": "烦", "meaning": "annoyed", "image": "Annoyed.png"}
       ],
       "practice": "(Tracing activity placeholder - draw the radical 火)",
       "emoji": "🔥",
@@ -70,10 +70,10 @@
       "meaning": "Tree",
       "description": "This radical mimics the shape of a tree with branches. The tree radical can be found in characters with meanings related to wood or trees.",
       "examples": [
-        "树: tree",
-        "林: forest",
-        "板: board",
-        "根: root"
+        {"char": "树", "meaning": "tree", "image": "Tree.png"},
+        {"char": "林", "meaning": "forest", "image": "Forest.png"},
+        {"char": "板", "meaning": "board", "image": "Board.png"},
+        {"char": "根", "meaning": "root", "image": "Root.png"}
       ],
       "practice": "(Tracing activity placeholder - draw the radical 木)",
       "emoji": "🌳",
@@ -81,7 +81,7 @@
       "stroke_order_gif": "tree.gif"
     }
   ],
-  "quiz": [
+   "quiz": [
     {
       "id": 1,
       "type": "multiple_choice",
