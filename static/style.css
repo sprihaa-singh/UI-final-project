@@ -40,6 +40,30 @@ body {
     padding: 5px 15px !important;
 }
 
+/* Add this to your static/style.css file */
+.example-characters-list li .example-icon {
+    height: 5em; /* Adjust size as needed */
+    width: auto;   /* Maintain aspect ratio */
+    vertical-align: middle; /* Align icon with text */
+}
+
+/* Optional: Adjust alignment if needed */
+.example-characters-list li {
+    display: flex;
+    align-items: center; /* Vertically center items in the list item */
+    margin-bottom: 0.5rem; /* Add some space between list items */
+}
+
+.example-characters-list li span.chinese-char {
+    font-size: 4.5em; /* Slightly smaller to balance with icon */
+    line-height: 1;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 0.3em; /* Space between char and icon */
+    min-width: 1.5em; /* Ensure space even for simpler chars */
+    text-align: center;
+}
+
 .quiz-content-container {
     display: flex;
     flex-direction: column;
