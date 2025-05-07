@@ -85,7 +85,7 @@
     {
       "id": 1,
       "type": "multiple_choice",
-      "question": "Identify the radical this character uses: 海 (hǎi)",
+      "question": "Based on the radical that this character uses, what does it most likely mean? 海 (hǎi)",
       "character": "海",
       "pinyin": "hǎi",
       "options": ["Hand", "Ocean", "Flame", "Wood"],
