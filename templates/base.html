@@ -40,7 +40,7 @@
                                 <li>
                                     {# Point the link to the part 0 page #}
                                     <a class="dropdown-item" href="{{ url_for('learn', lesson_id=radical.id, part=0) }}">
-                                        {{ radical.radical }} {{ radical.emoji }} {{ radical.meaning }}
+                                        {{ radical.radical }} <span class="rotated-emoji">{{ radical.emoji }}</span> {{ radical.meaning }}
                                     </a>
                                 </li>
                                 {% endfor %}

@@ -128,3 +128,8 @@ body {
     position: absolute;
     cursor: move;
 }
+
+.rotated-emoji {
+    display: inline-block;
+    transform: rotate(90deg);
+}
