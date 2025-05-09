@@ -4,33 +4,45 @@
 <div class="container mt-5">
   <h2 class="mb-4">Learn Radical: {{ lesson.radical }} (Part 1/2)</h2>
 
-  <div class="mb-3">
-    <strong>Meaning:</strong> {{ lesson.meaning }}<br>
-    <strong>Pinyin:</strong> {{ lesson.pinyin }}<br>
-    {% if lesson.examples %}
-    <strong>Example Characters:</strong><br>
-    {# Updated class "example-characters-list" to the ul tag #}
-    <ul class="example-characters-list list-unstyled"> {# Added list-unstyled for cleaner look #}
+  <!-- flex‐row: emoji + meaning/pinyin -->
+  <div class="d-flex align-items-center mb-4">
+    <div class="emoji-container me-4" style="font-size:6rem; line-height:1;">
+      {{ lesson.emoji }}
+    </div>
+    <div>
+      <strong>Meaning:</strong> {{ lesson.meaning }}<br>
+      <strong>Pinyin:</strong> {{ lesson.pinyin }}
+    </div>
+  </div>
+
+  <!-- examples back in single column under -->
+  {% if lesson.examples %}
+    <strong>Example Characters:</strong>
+    <ul class="example-characters-list list-unstyled mt-2">
       {% for example in lesson.examples %}
-        {# Now expecting example to be an object with char, meaning, image #}
-        <li class="d-flex align-items-center mb-2"> {# Use flexbox for alignment #}
-          <span class="chinese-char me-2">{{ example.char }}</span> {# Added margin #}
-          {# Add the image tag - assumes images are in static/icons/ #}
-          <img src="{{ url_for('static', filename='icons/' + example.image) }}"
-               alt="{{ example.meaning }}"
-               class="example-icon me-2"> {# Added class for styling and margin #}
+        <li class="d-flex align-items-center mb-2">
+          <span class="chinese-char me-2">{{ example.char }}</span>
+          <img
+            src="{{ url_for('static', filename='icons/' + example.image) }}"
+            alt="{{ example.meaning }}"
+            class="example-icon me-2"
+          >
           <span>({{ example.meaning }})</span>
         </li>
       {% endfor %}
     </ul>
-    {% endif %}
-    {% if lesson.description %}
-    <strong>Description:</strong> {{ lesson.description }}
-    {% endif %}
-  </div>
+  {% endif %}
+
+  {% if lesson.description %}
+    <div class="mt-3">
+      <strong>Description:</strong> {{ lesson.description }}
+    </div>
+  {% endif %}
 
   <div class="mt-4">
-      <button class="btn btn-primary" id="next-button" data-lesson-id="{{ lesson_id }}" data-part="0">Next</button>
+    <button class="btn btn-primary" id="next-button" data-lesson-id="{{ lesson_id }}" data-part="0">
+      Next
+    </button>
   </div>
 </div>
 {% endblock %}
