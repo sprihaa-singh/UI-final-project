@@ -6,8 +6,8 @@ To run locally:
 
 2) Open a new Terminal window at the folder. 
 
-3) In bash command: python server.py
+3) In bash command: python server.py.
 
 4) It should start running on http://127.0.0.1:5001/
 
-5) Open http://127.0.0.1:5001/ in a tab on a browser, and view the website/app from there
+5) Open http://127.0.0.1:5001/ in a tab on a browser, and view the website/app from there.
