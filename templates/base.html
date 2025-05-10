@@ -35,12 +35,10 @@
                                 LEARN
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownLearn">
-                                {# Loop through radicals_list passed from server.py context #}
                                 {% for radical in radicals_list %}
                                 <li>
-                                    {# Point the link to the part 0 page #}
                                     <a class="dropdown-item" href="{{ url_for('learn', lesson_id=radical.id, part=0) }}">
-                                        {{ radical.radical }} <span class="rotated-emoji">{{ radical.emoji }}</span> {{ radical.meaning }}
+                                        {{ radical.radical }} <span class="{% if radical.id == 1 %}rotated-emoji{% endif %}">{{ radical.emoji }}</span> {{ radical.meaning }}
                                     </a>
                                 </li>
                                 {% endfor %}

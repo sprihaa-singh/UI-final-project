@@ -5,15 +5,15 @@
   <h2 class="mb-4">Learn Radical: {{ lesson.radical }} (Part 1/2)</h2>
 
   <!-- flex‐row: emoji + meaning/pinyin -->
-  <div class="d-flex align-items-center mb-4">
-    <div class="emoji-container me-4" style="font-size:6rem; line-height:1; transform: rotate(90deg);">
+<div class="d-flex align-items-center mb-4">
+  <div class="emoji-container me-4" style="font-size:6rem; line-height:1;{% if lesson_id == 1 %} transform: rotate(90deg);{% endif %}">
       {{ lesson.emoji }}
-    </div>
-    <div>
+  </div>
+  <div>
       <strong>Meaning:</strong> {{ lesson.meaning }}<br>
       <strong>Pinyin:</strong> {{ lesson.pinyin }}
-    </div>
   </div>
+</div>
 
   <!-- examples back in single column under -->
   {% if lesson.examples %}
